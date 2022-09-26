@@ -1,0 +1,24 @@
+{
+  "name": "slo",
+  "version": "1.0.0",
+  "description": "Hold SLO proof of concepts and research documents",
+  "main": "lib/index.js",
+  "keywords": [
+    "SLO",
+    "Data generator",
+    "Burn Rate",
+    "Elasticsearch",
+    "elastic"
+  ],
+  "author": "kdelemme",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.4.0",
+    "date-fns": "^2.29.3",
+    "date-fns-tz": "^1.3.7"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  }
+}
