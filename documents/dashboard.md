@@ -1,10 +1,30 @@
 # SLO Dashboard
 
-## Erorr budget consumption over time
+## SLI Value
 
-
-Create Lens with formula:
-0.05 is the error budget
+Metric in percent:
 ```
-(1 - cumulative_sum(sum(slo.denominator) - sum(slo.numerator)) / (overall_sum(sum(slo.denominator)) * (0.05)) )* 100
+sum(slo.numerator) / sum(slo.denominator)
+```
+
+## Error budget Consumed
+
+Metric in percent:
+```
+(sum(slo.denominator) - sum(slo.numerator)) / (sum(slo.denominator) * (1 - last_value(slo._internal.objective.target)))
+```
+
+## Error Budget Remaining
+
+
+Lines with formula
+```
+(1 - cumulative_sum(sum(slo.denominator) - sum(slo.numerator)) / (overall_sum(sum(slo.denominator)) * (1-last_value(slo._internal.objective.target))) ) * 100
+```
+
+## SLO Value over time
+
+Lines with formula
+```
+cumulative_sum(sum(slo.numerator)) / cumulative_sum(sum(slo.denominator))
 ```
