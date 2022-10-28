@@ -7,10 +7,15 @@ You'll find some proof of concepts, research documents, es queries...
 Handy if you want to generate some data for an existing SLO, and keep generating the data as time passes.
 The script will generate 3 month of historical data, and then every minute, will insert a new document.
 
-1. Create an SLO through the API. Copy the slo.id
-2. Stop the transform manually associated to this slo
-3. Remove the data manually (delete by query or delete all indices)
-4. Run `node lib/continuous_rollup_data_generator/index.js slo_id [min] [max]` with min and max the ratio of good events compare to the total events to generate
+1. Create an SLO through the API. Copy the slo `id`
+2. Stop the **transform** manually associated to this slo
+3. Remove the data manually (delete by query or delete all slo indices)
+4. Run `node lib/continuous_rollup_data_generator/index.js slo_id` 
+
+
+The data is generated with the following noise function. When the function returns a negative value, we use it to compute the `good` events as a ratio of the `total` events.
+![noise](./noise.svg)
+
    
 
 ## Generate SLO rollup data
