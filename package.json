@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Hold SLO proof of concepts and research documents",
   "main": "lib/index.js",
+  "type": "module",
   "keywords": [
     "SLO",
     "Data generator",
