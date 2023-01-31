@@ -19,14 +19,11 @@
       "dataset": {
         "type": "keyword"
       },
-      "label": {
+      "host": {
         "type": "keyword"
       },
       "latency": {
         "type": "long"
-      },
-      "message": {
-        "type": "text"
       }
     }
   },

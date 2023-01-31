@@ -59,3 +59,17 @@ All generated data points are using constant values, e.g. numerator = 100, denom
 
 
 Run: `node lib/rollup_data`
+
+
+## Generate latency logs
+
+Generates some latency logs that can be used for creating SLOs on. The logs contains `latency` field.
+
+`SCENARIO` can be either:
+- `90percent_good`: 90% of the time, the latency is below 100ms ([0, 100]), or above 300ms ([300, 600])
+- `95percent_good`: 95% of the time, the latency is below 100ms ([0, 100]), or above 300ms ([300, 600])
+- `99percent_good`: 99% of the time, the latency is below 100ms ([0, 100]), or above 300ms ([300, 600])
+- `
+
+
+Run `SCENARIO="95percent_good" node lib/latency_logs_generator/index`
