@@ -69,7 +69,8 @@ Generates some latency logs that can be used for creating SLOs on. The logs cont
 - `90percent_good`: 90% of the time, the latency is below 100ms ([0, 100]), or above 300ms ([300, 600])
 - `95percent_good`: 95% of the time, the latency is below 100ms ([0, 100]), or above 300ms ([300, 600])
 - `99percent_good`: 99% of the time, the latency is below 100ms ([0, 100]), or above 300ms ([300, 600])
-- `
+- `full_outage_every_day`: Follow a sinusoidale function to generate the good (f(x) >= 0) and bad (f(x) < 0) logs. Function is meant to be negative once per day-ish
+- `healthy_then_failing`: Previous data is 100% good, then starts failing
 
 
 Run `SCENARIO="95percent_good" node lib/latency_logs_generator/index`
