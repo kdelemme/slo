@@ -16,50 +16,6 @@ The script will generate 3 month of historical data, and then every minute, will
 The data is generated with the following noise function. When the function returns a negative value, we use it to compute the `good` events as a ratio of the `total` events.
 ![noise](./noise.svg)
 
-   
-
-## Generate SLO rollup data
-
-You'll need to have the SLO resources (indices and pipeline) installed on your ES instance, therefore, make sure you have created at least on SLO using the API.
-
-```
-curl --request POST \
-  --url http://localhost:5601/efu/api/observability/slos \
-  --header 'Authorization: Basic ZWxhc3RpYzpjaGFuZ2VtZQ==' \
-  --header 'Content-Type: application/json' \
-  --header 'kbn-xsrf: oui' \
-  --data '{
-	"name": "My SLO Availability 1",
-	"description": "99% o11y-app all services availablility",
-	"indicator": {
-		"type": "slo.apm.transaction_error_rate",
-		"params": {
-			"environment": "development",
-			"service": "o11y-app",
-			"transaction_type": "request",
-			"transaction_name": "GET /flaky"
-		}
-	},
-	"time_window": {
-		"duration": "7d",
-		"is_rolling": true
-	},
-	"budgeting_method": "occurrences",
-	"objective": {
-		"target": 0.99
-	}
-}'
-```
-
-In order to work on the SLO alerting project, we need to artificially generate a bunch of aggregated data as the SLO transform would do in production.
-The script under `lib/rollup_data/index.js` generates 2 days of aggregate data (per minute). It output the generated slo id.
-
-All generated data points are using constant values, e.g. numerator = 100, denominator = 100, except for a defined outage window using the `errorSpikeDateRange`.
-
-
-
-Run: `node lib/rollup_data`
-
 
 ## Generate latency logs
 
@@ -73,4 +29,13 @@ Generates some latency logs that can be used for creating SLOs on. The logs cont
 - `healthy_then_failing`: Previous data is 100% good, then starts failing
 
 
-Run `SCENARIO="95percent_good" node lib/latency_logs_generator/index`
+```bash
+	SCENARIO="95percent_good" node lib/latency_logs_generator/index
+```
+
+## Generate historical summary data
+
+Generates some historical summary data to be use in tests/storybook. Tweak the scripts under `lib/historical_summary_generator` to match the expected use case then run:
+```bash
+  node lib/historical_summary_generator/index
+```
